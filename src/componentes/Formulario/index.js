@@ -4,7 +4,7 @@ import ListaSuspensa from '../ListaSuspensa';
 import Botao from '../Botao';
 import { useState } from 'react';
 
-const Formulario = (props) => {
+const Formulario = ({aoCadastrarColaborador, times}) => {
 
     const [nome, setNome] = useState('')
     const [cargo, setCargo] = useState('')
@@ -13,7 +13,7 @@ const Formulario = (props) => {
 
     const aoSalvar = (evento) => {
         evento.preventDefault()
-        props.aoCadastrarColaborador({nome, cargo, imagem, time})
+        aoCadastrarColaborador({nome, cargo, imagem, time})
         setNome('')
         setCargo('')
         setImagem('')
@@ -21,8 +21,8 @@ const Formulario = (props) => {
     }
 
     return (
-        <section className='formulario'>
-            <form onSubmit={aoSalvar}>
+        <section className='formulario-container'>
+            <form className='formulario' onSubmit={aoSalvar}>
                 <h2>Preencha os dados para criar o card do colaborador</h2>
                 <CampoTexto 
                     obrigatorio={true} 
@@ -43,11 +43,11 @@ const Formulario = (props) => {
                     aoAlterar={valor => setImagem(valor)} />
                 <ListaSuspensa 
                     obrigatorio={true} 
-                    itens={props.times} 
+                    itens={times} 
                     label="Time" 
                     valor={time}
                     aoAlterar={valor => setTime(valor)} />
-                <Botao>Criar Card</Botao>
+                <Botao texto="Criar Card" />
             </form>
         </section>
 
