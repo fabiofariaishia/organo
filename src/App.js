@@ -57,7 +57,12 @@ function App() {
         aoCadastrarColaborador={colaborador => aoAdicionarColaborador(colaborador)}
         times={times.map(time => time.nome)}/>
       
-      {times.map(time => <Time key={time.nome} nome={time.nome} corPrimaria={time.corPrimaria} corSecundaria={time.corSecundaria} />)}
+      {times.map(time => <Time 
+        key={time.nome} 
+        nome={time.nome} 
+        corPrimaria={time.corPrimaria} 
+        corSecundaria={time.corSecundaria}
+        colaboradores={colaboradores.filter(colaborador => colaborador.time === time.nome)} />)}
       
     </div>
   );
