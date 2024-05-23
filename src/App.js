@@ -48,6 +48,7 @@ function App() {
         // Programação
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'FABIO FARIA',
             cargo: 'Programador',
             imagem: 'https://randomuser.me/api/portraits/men/85.jpg',
@@ -55,6 +56,7 @@ function App() {
         },
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'CAROLINA MELO',
             cargo: 'Desenvolvedora Back-End',
             imagem: 'https://randomuser.me/api/portraits/women/65.jpg',
@@ -62,6 +64,7 @@ function App() {
         },
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'MARCELO NUNES',
             cargo: 'Engenheiro de Software',
             imagem: 'https://randomuser.me/api/portraits/men/15.jpg',
@@ -70,6 +73,7 @@ function App() {
         // Front-End
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'LUCAS OLIVEIRA',
             cargo: 'Desenvolvedor Front-End',
             imagem: 'https://randomuser.me/api/portraits/men/45.jpg',
@@ -77,6 +81,7 @@ function App() {
         },
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'JULIA COSTA',
             cargo: 'UI Designer',
             imagem: 'https://randomuser.me/api/portraits/women/44.jpg',
@@ -84,6 +89,7 @@ function App() {
         },
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'ANA MORAES',
             cargo: 'Tester',
             imagem: 'https://randomuser.me/api/portraits/women/16.jpg',
@@ -92,6 +98,7 @@ function App() {
         // Data Science
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'CARLOS SILVA',
             cargo: 'Cientista de Dados',
             imagem: 'https://randomuser.me/api/portraits/men/56.jpg',
@@ -99,6 +106,7 @@ function App() {
         },
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'FERNANDA LIMA',
             cargo: 'Analista de Dados',
             imagem: 'https://randomuser.me/api/portraits/women/66.jpg',
@@ -106,6 +114,7 @@ function App() {
         },
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'RAFAEL BARBOSA',
             cargo: 'Engenheiro de Machine Learning',
             imagem: 'https://randomuser.me/api/portraits/men/33.jpg',
@@ -114,6 +123,7 @@ function App() {
         // DevOps
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'BRUNO MARTINS',
             cargo: 'Engenheiro DevOps',
             imagem: 'https://randomuser.me/api/portraits/men/88.jpg',
@@ -127,6 +137,7 @@ function App() {
         },
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'RODRIGO GONÇALVES',
             cargo: 'Engenheiro de Automação',
             imagem: 'https://randomuser.me/api/portraits/men/99.jpg',
@@ -135,6 +146,7 @@ function App() {
         // UX e Design
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'CAROLINA ROCHA',
             cargo: 'Designer UX/UI',
             imagem: 'https://randomuser.me/api/portraits/women/77.jpg',
@@ -148,6 +160,7 @@ function App() {
         },
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'FELIPE RAMOS',
             cargo: 'Desenvolvedor Front-End',
             imagem: 'https://randomuser.me/api/portraits/men/24.jpg',
@@ -156,6 +169,7 @@ function App() {
         // Mobile
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'RICARDO LOPES',
             cargo: 'Desenvolvedor Mobile',
             imagem: 'https://randomuser.me/api/portraits/men/44.jpg',
@@ -163,6 +177,7 @@ function App() {
         },
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'PRISCILA CASTRO',
             cargo: 'QA Mobile',
             imagem: 'https://randomuser.me/api/portraits/women/33.jpg',
@@ -170,6 +185,7 @@ function App() {
         },
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'LUANA NUNES',
             cargo: 'Designer Mobile',
             imagem: 'https://randomuser.me/api/portraits/women/55.jpg',
@@ -178,6 +194,7 @@ function App() {
         // Inovação e Gestão
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'MATEUS RIBEIRO',
             cargo: 'Gestor de Projetos',
             imagem: 'https://randomuser.me/api/portraits/men/11.jpg',
@@ -185,6 +202,7 @@ function App() {
         },
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'NATHALIA FERREIRA',
             cargo: 'Analista de Inovação',
             imagem: 'https://randomuser.me/api/portraits/women/88.jpg',
@@ -192,6 +210,7 @@ function App() {
         },
         {
             id: uuidv4(),
+            favorito: false,
             nome: 'JOÃO VIEIRA',
             cargo: 'Coordenador de Gestão',
             imagem: 'https://randomuser.me/api/portraits/men/22.jpg',
@@ -218,7 +237,16 @@ function App() {
     }
 
     function cadastrarTime(novoTime) {
-        setTimes([...times, {...novoTime, id: uuidv4()}])
+        setTimes([...times, { ...novoTime, id: uuidv4() }]);
+    }
+
+    function resolverFavorito(id) {
+        setColaboradores(
+            colaboradores.map((colaborador) => {
+                if (colaborador.id === id) colaborador.favorito = !colaborador.favorito;
+                return colaborador;
+            })
+        );
     }
 
     return (
@@ -235,6 +263,7 @@ function App() {
                 <h1>Minha Organização</h1>
                 {times.map((time, indice) => (
                     <Time
+                        aoFavoritar={resolverFavorito}
                         mudarCor={mudarCorDoTime}
                         key={indice}
                         time={time}
