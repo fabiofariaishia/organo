@@ -4,6 +4,7 @@ import Formulario from './componentes/Formulario';
 import Time from './componentes/Time';
 import Rodape from './componentes/Rodape';
 import { v4 as uuidv4 } from 'uuid';
+import { BsBuildingFillAdd } from 'react-icons/bs';
 
 function App() {
     const [times, setTimes] = useState([
@@ -220,6 +221,8 @@ function App() {
 
     const [colaboradores, setColaboradores] = useState(inicial);
 
+    const [formVisivel, setFormVisivel] = useState(false)
+
     function deletarColaborador(id) {
         setColaboradores(colaboradores.filter((colaborador) => colaborador.id !== id));
     }
@@ -249,6 +252,10 @@ function App() {
         );
     }
 
+    function toggleFormulario() {
+        setFormVisivel(!formVisivel)
+    }
+
     return (
         <div className="App">
             <Banner />
@@ -258,9 +265,15 @@ function App() {
                     setColaboradores([...colaboradores, colaborador])
                 }
                 times={times.map((time) => time.nome)}
+                visivel={formVisivel}
             />
             <section className="times">
-                <h1>Minha Organização</h1>
+                <div style={{ position: 'relative' }}>
+                    <h1>Minha Organização</h1>
+                    <div className='btnForm' style={{position: 'absolute', top: '50px', right: '50px'}}>
+                        <BsBuildingFillAdd  size={30} onClick={toggleFormulario} />
+                    </div>
+                </div>
                 {times.map((time, indice) => (
                     <Time
                         aoFavoritar={resolverFavorito}

@@ -4,7 +4,7 @@ import ListaSuspensa from '../ListaSuspensa';
 import Botao from '../Botao';
 import { useState } from 'react';
 
-const Formulario = ({ aoCadastrarColaborador, times, aoCadastrarTime }) => {
+const Formulario = ({ aoCadastrarColaborador, times, aoCadastrarTime, visivel }) => {
     const [nome, setNome] = useState('');
     const [cargo, setCargo] = useState('');
     const [imagem, setImagem] = useState('');
@@ -22,7 +22,7 @@ const Formulario = ({ aoCadastrarColaborador, times, aoCadastrarTime }) => {
     };
 
     return (
-        <section className="formulario-container">
+        <section className="formulario-container" style={{display: visivel ? 'flex' : 'none'}}>
             <form className="formulario" onSubmit={aoSalvar}>
                 <h2>Preencha os dados para criar o card do colaborador</h2>
                 <Campo
